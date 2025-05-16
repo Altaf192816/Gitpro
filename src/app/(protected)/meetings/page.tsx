@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import ConfirmationDialog from "@/app/_components/deleteConfiramtion";
 
 const MeetingPage = () => {
-  const { projectId,isLoading:isProjectLoading } = useProject();
+  const { projectId, isLoading: isProjectLoading } = useProject();
   const { data: meetings, isLoading } = api.project.getMeetings.useQuery(
     {
       projectId: projectId,
@@ -67,7 +67,11 @@ const MeetingPage = () => {
             </div>
             <div className="flex flex-none items-center gap-x-4">
               <Link href={`meetings/${meeting.id}`}>
-                <Button size={"sm"} variant={"outline"}>
+                <Button
+                  disabled={meeting.status === "PROCESSING"}
+                  size={"sm"}
+                  variant={"outline"}
+                >
                   View Meeting
                 </Button>
               </Link>
